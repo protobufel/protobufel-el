@@ -161,7 +161,7 @@ if (project.hasProperty('ossrhUsername')) {
         }
     }
 
-    copyJavadocToDoc.dependsOn 'uploadArchives'
+    copyJavadocToDoc.dependsOn 'javadoc'
 
     artifacts {
         archives javadocJar, sourcesJar
@@ -175,6 +175,7 @@ if (project.hasProperty('ossrhUsername')) {
 //        tagTemplate = "${version}"
     }
 
+    uploadArchives.finalizedBy 'copyJavadocToDoc'
     afterReleaseBuild.dependsOn uploadArchives
 } else {
     test {
